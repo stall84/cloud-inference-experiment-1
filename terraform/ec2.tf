@@ -1,4 +1,4 @@
-resource "aws_instance" "ollama" {
+resource "aws_instance" "ollama-remote" {
   ami                         = data.aws_ssm_parameter.ubuntu_dlami.value
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.this.key_name
@@ -17,16 +17,16 @@ resource "aws_instance" "ollama" {
   user_data_replace_on_change = true
 
   tags = {
-    Name = "${var.project_name}-ollama"
+    Name = "${var.project_name}-ollama-remote"
   }
 }
 
-resource "aws_eip" "ollama" {
+resource "aws_eip" "ollama-remote" {
   count    = var.enable_eip ? 1 : 0
   domain   = "vpc"
-  instance = aws_instance.ollama.id
+  instance = aws_instance.ollama-remote.id
 
   tags = {
-    Name = "${var.project_name}-ollama-eip"
+    Name = "${var.project_name}-ollama-remote-eip"
   }
 }
