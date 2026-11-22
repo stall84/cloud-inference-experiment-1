@@ -1,0 +1,14 @@
+# Copy this file to terraform.tfvars and adjust as needed.
+# terraform.tfvars itself is gitignored since it can reflect your personal IP.
+
+aws_region = "us-west-2"
+
+# Your current IPs (from whatsmyip.com). IPv4 is locked to /32; IPv6 is
+# allowed as a /64 subnet since IPv6 addresses often rotate for privacy.
+# Re-run scripts/get-my-ip.sh and update these if SSH access ever stops working.
+allowed_ssh_ipv4_cidrs = ["172.56.82.159/32"]
+allowed_ssh_ipv6_cidrs = ["2607:fb91:4f8c:458e::/64"]
+
+root_volume_gb   = 150
+enable_eip       = true
+generate_ssh_key = true
